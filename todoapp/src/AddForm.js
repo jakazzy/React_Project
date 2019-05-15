@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 
 class AddForm extends Component{
     state ={
-        content:null
+        content:""
     }
 
     addForm =(e)=>{
         e.preventDefault();
-        this.props.addTodo(this.state)
+        this.props.addTodo(this.state);
+        this.setState({
+            content: ""
+        })
     }
 
     handleChange=(e)=>{
@@ -22,7 +25,7 @@ class AddForm extends Component{
             <div>
                 <form onSubmit = {this.addForm}>
                 <label> Add new Todo: </label>
-                    <input type="text" name="content" onChange={this.handleChange} />
+                    <input type="text" name="content" onChange={this.handleChange} value={this.state.content} />
                 </form>
             </div>
         )
