@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Todos from './todos';
+import AddForm from './AddForm';
 
 class App extends Component{
   state ={
@@ -8,11 +9,31 @@ class App extends Component{
       {id:2, content:"Play some mario"}
     ]
   }
+
+  deleteTodos =(id) =>{
+    const todos = this.state.todos.filter((todo)=>{
+      return id !== todo.id
+    })
+
+    this.setState({
+      todos
+    })
+  }
+
+  addTodo =(todo) =>{
+    todo.id = Math.random();
+    const todos = [...this.state.todos, todo];
+    this.setState({
+      todos
+    })
+  }
+
   render(){
     return(
       <div className="todo-app container">
       <h1 className="center blue-text"> To do's</h1>
-       <Todos todos={this.state.todos}/>
+       <Todos todos={this.state.todos} deleteTodos = {this.deleteTodos} />
+       <AddForm addTodo ={this.addTodo}/>
       </div>
     )
   }
